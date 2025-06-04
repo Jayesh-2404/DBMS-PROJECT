@@ -209,13 +209,13 @@ const TransactionHistory: React.FC = () => {
                     const isSender = transaction.sender.payId === session?.user?.payId;
                     return (
                       <tr key={transaction.id} className={styles.transactionRow}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300" data-label="Date">
                           {new Date(transaction.createdAt).toLocaleDateString()}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-500 dark:text-gray-400">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-500 dark:text-gray-400" data-label="Transaction ID">
                           {transaction.transactionId}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4 whitespace-nowrap" data-label="Type">
                           <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                             isSender 
                               ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' 
@@ -224,7 +224,7 @@ const TransactionHistory: React.FC = () => {
                             {isSender ? 'Sent' : 'Received'}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300" data-label={isSender ? "To" : "From"}>
                           <div className="flex items-center">
                             <FiUser className="mr-2 h-4 w-4 text-gray-400 dark:text-gray-500" />
                             <span>
@@ -234,14 +234,14 @@ const TransactionHistory: React.FC = () => {
                             </span>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-right">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-right" data-label="Amount">
                           <span className={`${
                             isSender ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'
                           }`}>
                             {isSender ? '-' : '+'}{formatCurrency(transaction.amount)}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-center">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-center" data-label="Actions">
                           <div className="flex justify-center space-x-3">
                             <button
                               onClick={() => {/* View transaction details */}}
@@ -252,7 +252,7 @@ const TransactionHistory: React.FC = () => {
                             </button>
                             <button
                               onClick={() => {/* Download receipt */}}
-                              className={`text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 transition-colors ${styles.actionButton}`}
+                              className={`text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-300 transition-colors ${styles.actionButton}`}
                               title="Download Receipt"
                             >
                               <FiDownload className="h-5 w-5" />

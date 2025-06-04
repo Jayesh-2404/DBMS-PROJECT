@@ -2,6 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import { AuthProvider } from '@/components/AuthProvider';
 import Layout from '@/components/Layout';
+import { ThemeProvider } from 'next-themes';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,11 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <AuthProvider>
-          <Layout>
-            {children}
-          </Layout>
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AuthProvider>
+            <Layout>
+              {children}
+            </Layout>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
